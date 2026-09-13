@@ -1,0 +1,35 @@
+<div class="shell">
+  <aside class="sidebar" [class.open]="mobileMenuOpen()">
+    <a class="brand" routerLink="/dashboard" (click)="mobileMenuOpen.set(false)">
+      <span class="brand-mark">V</span>
+      <span>Vistor<span>.ia</span></span>
+    </a>
+
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active" (click)="mobileMenuOpen.set(false)">Visão geral</a>
+      <a routerLink="/modelos" routerLinkActive="active" (click)="mobileMenuOpen.set(false)">Modelos</a>
+      <a routerLink="/vistorias" routerLinkActive="active" (click)="mobileMenuOpen.set(false)">Vistorias</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar">{{ authService.user()?.name?.charAt(0) }}</div>
+      <div class="user-copy">
+        <strong>{{ authService.user()?.name }}</strong>
+        <small>{{ authService.user()?.email }}</small>
+      </div>
+      <button type="button" title="Sair" (click)="authService.logout()">↗</button>
+    </div>
+  </aside>
+
+  <main>
+    <header class="mobile-header">
+      <a class="brand" routerLink="/dashboard"><span class="brand-mark">V</span>Vistor.ia</a>
+      <button type="button" (click)="mobileMenuOpen.set(!mobileMenuOpen())">Menu</button>
+    </header>
+    <router-outlet />
+  </main>
+
+  @if (mobileMenuOpen()) {
+    <button class="backdrop" aria-label="Fechar menu" (click)="mobileMenuOpen.set(false)"></button>
+  }
+</div>

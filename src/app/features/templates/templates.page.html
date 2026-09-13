@@ -1,0 +1,19 @@
+<section class="page">
+  <header class="page-heading"><div><h1>Modelos de vistoria</h1><p>Defina as evidências exigidas para cada tipo de inspeção.</p></div><button class="btn btn-primary" (click)="openModal()">Novo modelo</button></header>
+  @if (loading()) { <div class="card empty">Carregando modelos...</div> }
+  @else if (!templates().length) { <div class="card empty"><h3>Nenhum modelo cadastrado</h3><p>Crie o primeiro modelo para começar a solicitar vistorias.</p></div> }
+  @else { <div class="template-grid">@for (template of templates(); track template.id) {
+    <article class="card template-card"><header><span>{{ template.category }}</span><small>{{ template.active ? 'Ativo' : 'Inativo' }}</small></header><h2>{{ template.name }}</h2><p>{{ template.description || 'Sem descrição.' }}</p><footer><strong>{{ template.photoRequirements.length }}</strong> exigências configuradas</footer></article>
+  }</div> }
+</section>
+@if (modalOpen()) {
+  <div class="modal-backdrop" (click)="modalOpen.set(false)"></div>
+  <section class="modal card" role="dialog" aria-modal="true"><header><div><h2>Novo modelo</h2><p>Configure os dados e fotos exigidas.</p></div><button type="button" (click)="modalOpen.set(false)">×</button></header>
+    <form [formGroup]="form" (ngSubmit)="save()"><div class="form-grid"><div class="field"><label>Nome</label><input formControlName="name" placeholder="Ex.: Vistoria veicular básica"></div><div class="field"><label>Categoria</label><input formControlName="category" placeholder="Ex.: Veicular"></div></div><div class="field"><label>Descrição</label><textarea rows="2" formControlName="description" placeholder="Objetivo deste modelo"></textarea></div>
+      <div class="requirements-title"><div><strong>Exigências fotográficas</strong><small>Defina o que deverá ser fotografado</small></div><button class="btn btn-secondary" type="button" (click)="addRequirement()">Adicionar foto</button></div>
+      <div formArrayName="photoRequirements" class="requirements">@for (control of requirements.controls; track $index; let index = $index) { <div class="requirement" [formGroupName]="index"><div class="field"><label>Identificador</label><input formControlName="code" placeholder="frontal"></div><div class="field grow"><label>Nome da exigência</label><input formControlName="label" placeholder="Foto frontal"></div><label class="check"><input type="checkbox" formControlName="required"> Obrigatória</label><button class="remove" type="button" (click)="removeRequirement(index)" [disabled]="requirements.length === 1">×</button></div> }</div>
+      @if (errorMessage()) { <div class="notice notice-error">{{ errorMessage() }}</div> }
+      <footer><button class="btn btn-secondary" type="button" (click)="modalOpen.set(false)">Cancelar</button><button class="btn btn-primary" type="submit" [disabled]="saving()">{{ saving() ? 'Salvando...' : 'Salvar modelo' }}</button></footer>
+    </form>
+  </section>
+}

@@ -1,0 +1,18 @@
+<section class="page">
+  <header class="page-heading"><div><h1>Vistorias</h1><p>Crie solicitações e acompanhe o envio das evidências.</p></div><button class="btn btn-primary" (click)="openModal()" [disabled]="!templates().length">Nova vistoria</button></header>
+  @if (!templates().length && !loading()) { <div class="notice warning">Cadastre um modelo antes de criar uma vistoria.</div> }
+  <section class="card list-card">
+    @if (loading()) { <div class="empty">Carregando vistorias...</div> }
+    @else if (!inspections().length) { <div class="empty"><h3>Nenhuma vistoria encontrada</h3><p>As solicitações criadas aparecerão aqui.</p></div> }
+    @else { <div class="table-wrap"><table><thead><tr><th>Bem / placa</th><th>Modelo</th><th>Destinatário</th><th>Status</th><th>Validade</th></tr></thead><tbody>
+      @for (inspection of inspections(); track inspection.id) { <tr><td><strong>{{ inspection.assetIdentification }}</strong><small>{{ inspection.id.slice(0, 8) }}</small></td><td>{{ inspection.templateName }}</td><td><strong>{{ inspection.recipientName }}</strong><small>{{ inspection.recipientEmail }}</small></td><td><span class="status status-{{ inspection.status }}">{{ statusLabel(inspection.status) }}</span></td><td>{{ inspection.expiresAtUtc | date:'dd/MM/yyyy HH:mm' }}</td></tr> }
+    </tbody></table></div> }
+  </section>
+</section>
+@if (modalOpen()) {
+  <div class="modal-backdrop" (click)="closeModal()"></div><section class="modal card" role="dialog" aria-modal="true">
+    <header><div><h2>{{ createdInspection() ? 'Vistoria criada' : 'Nova vistoria' }}</h2><p>{{ createdInspection() ? 'Compartilhe o link abaixo com o responsável.' : 'Informe quem realizará a inspeção.' }}</p></div><button type="button" (click)="closeModal()">×</button></header>
+    @if (createdInspection(); as created) { <div class="success-content"><div class="success-icon">✓</div><h3>Solicitação gerada com sucesso</h3><p>O link é válido até {{ created.expiresAtUtc | date:'dd/MM/yyyy HH:mm' }}.</p><div class="link-box"><input readonly [value]="created.publicUrl"><button class="btn btn-secondary" (click)="copyLink()">Copiar</button></div><button class="btn btn-primary" (click)="closeModal()">Concluir</button></div> }
+    @else { <form [formGroup]="form" (ngSubmit)="create()"><div class="field"><label>Modelo de vistoria</label><select formControlName="templateId"><option value="">Selecione um modelo</option>@for(template of templates();track template.id){<option [value]="template.id">{{ template.name }}</option>}</select></div><div class="form-grid"><div class="field"><label>Nome do destinatário</label><input formControlName="recipientName" placeholder="Nome completo"></div><div class="field"><label>E-mail</label><input type="email" formControlName="recipientEmail" placeholder="email@exemplo.com"></div></div><div class="form-grid"><div class="field"><label>Identificação do bem</label><input formControlName="assetIdentification" placeholder="Placa, chassi ou patrimônio"></div><div class="field"><label>Validade do link (dias)</label><input type="number" formControlName="linkValidDays" min="1" max="30"></div></div><label class="send-check"><input type="checkbox" formControlName="sendNow"><span><strong>Enviar convite por e-mail</strong><small>O destinatário receberá o link ao criar a vistoria.</small></span></label>@if(errorMessage()){<div class="notice notice-error">{{ errorMessage() }}</div>}<footer><button class="btn btn-secondary" type="button" (click)="closeModal()">Cancelar</button><button class="btn btn-primary" type="submit" [disabled]="saving()">{{ saving() ? 'Criando...' : 'Criar vistoria' }}</button></footer></form> }
+  </section>
+}

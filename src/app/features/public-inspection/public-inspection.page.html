@@ -1,0 +1,52 @@
+<header class="public-header">
+  <a class="brand"><span>V</span>Vistor<em>.ia</em></a>
+  <small>Ambiente seguro de vistoria</small>
+</header>
+
+<main class="public-page">
+  @if (loading()) {
+    <section class="card state"><div class="loader"></div><p>Carregando sua vistoria...</p></section>
+  } @else if (completed()) {
+    <section class="card state success">
+      <div class="state-icon">✓</div>
+      <h1>Vistoria enviada</h1>
+      <p>As evidências foram registradas com sucesso. Você já pode fechar esta página.</p>
+    </section>
+  } @else if (!inspection()) {
+    <section class="card state"><div class="state-icon error-icon">!</div><h1>Link indisponível</h1><p>{{ errorMessage() }}</p></section>
+  } @else if (inspection(); as item) {
+    <section class="inspection-heading">
+      <div><span class="category">{{ item.category }}</span><h1>{{ item.templateName }}</h1><p>Olá, {{ item.recipientName }}. Envie as evidências solicitadas abaixo.</p></div>
+      <div class="asset"><small>IDENTIFICAÇÃO</small><strong>{{ item.assetIdentification }}</strong><span>Válido até {{ item.expiresAtUtc | date:'dd/MM/yyyy HH:mm' }}</span></div>
+    </section>
+
+    <section class="progress-card card">
+      <div><strong>Progresso da vistoria</strong><span>{{ completedRequirements() }} de {{ item.requirements.length }} evidências enviadas</span></div>
+      <div class="progress"><span [style.width.%]="(completedRequirements() / item.requirements.length) * 100"></span></div>
+    </section>
+
+    @if (errorMessage()) { <div class="notice notice-error page-error">{{ errorMessage() }}</div> }
+
+    <section class="requirements">
+      @for (requirement of item.requirements; track requirement.id; let index = $index) {
+        <article class="card requirement" [class.uploaded]="requirement.uploaded">
+          <div class="requirement-number">{{ requirement.uploaded ? '✓' : index + 1 }}</div>
+          <div class="requirement-copy"><h2>{{ requirement.label }}</h2><p>{{ requirement.required ? 'Evidência obrigatória' : 'Evidência opcional' }} · JPEG, PNG ou WEBP até 10 MB</p></div>
+          <label class="upload-button" [class.busy]="uploadingRequirementId() === requirement.id">
+            <input type="file" accept="image/jpeg,image/png,image/webp" (change)="selectPhoto(requirement.id, $event)" [disabled]="uploadingRequirementId() !== null">
+            @if (uploadingRequirementId() === requirement.id) { Enviando... }
+            @else if (requirement.uploaded) { Substituir foto }
+            @else { Selecionar foto }
+          </label>
+        </article>
+      }
+    </section>
+
+    <section class="card finish-card">
+      <div class="field"><label for="notes">Observações finais <span>(opcional)</span></label><textarea id="notes" rows="4" [(ngModel)]="notes" maxlength="2000" placeholder="Informe avarias, divergências ou detalhes relevantes..."></textarea></div>
+      <div class="finish-footer"><p>Ao concluir, não será possível alterar as evidências enviadas.</p><button class="btn btn-primary" (click)="complete()" [disabled]="!canComplete() || submitting()">{{ submitting() ? 'Enviando...' : 'Concluir vistoria' }}</button></div>
+    </section>
+  }
+</main>
+
+<footer class="public-footer">Vistor.ia · Processo digital e seguro</footer>

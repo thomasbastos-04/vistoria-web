@@ -1,0 +1,38 @@
+<main class="auth-page">
+  <section class="auth-intro">
+    <a class="brand" routerLink="/"><span>V</span>Vistor<em>.ia</em></a>
+    <div>
+      <p class="eyebrow">COMECE AGORA</p>
+      <h1>Um processo de vistoria simples para todos.</h1>
+      <p>Configure suas exigências e envie um link. O vistoriador não precisa criar uma conta.</p>
+    </div>
+    <small>Vistor.ia — gestão de inspeções com inteligência.</small>
+  </section>
+
+  <section class="auth-content">
+    <form class="auth-card" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mobile-brand"><span>V</span>Vistor.ia</div>
+      <header><h2>Crie sua conta</h2><p>Leva menos de um minuto.</p></header>
+      @if (errorMessage()) { <div class="notice notice-error">{{ errorMessage() }}</div> }
+      <div class="field">
+        <label for="name">Nome</label>
+        <input id="name" formControlName="name" autocomplete="name" placeholder="Seu nome completo">
+        @if (form.controls.name.touched && form.controls.name.invalid) { <p class="error">Informe pelo menos 2 caracteres.</p> }
+      </div>
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" formControlName="email" autocomplete="email" placeholder="voce@empresa.com">
+        @if (form.controls.email.touched && form.controls.email.invalid) { <p class="error">Informe um e-mail válido.</p> }
+      </div>
+      <div class="field">
+        <label for="password">Senha</label>
+        <input id="password" type="password" formControlName="password" autocomplete="new-password" placeholder="Mínimo de 8 caracteres">
+        @if (form.controls.password.touched && form.controls.password.invalid) { <p class="error">A senha deve ter pelo menos 8 caracteres.</p> }
+      </div>
+      <button class="btn btn-primary submit" type="submit" [disabled]="loading()">
+        @if (loading()) { <span class="spinner"></span> } @else { Criar conta }
+      </button>
+      <p class="switch">Já possui uma conta? <a routerLink="/login">Entrar</a></p>
+    </form>
+  </section>
+</main>

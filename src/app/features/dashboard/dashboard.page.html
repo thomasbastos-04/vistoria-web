@@ -1,0 +1,28 @@
+<section class="page">
+  <header class="page-heading">
+    <div><h1>Visão geral</h1><p>Acompanhe os principais números das suas vistorias.</p></div>
+    <a class="btn btn-primary" routerLink="/vistorias">Nova vistoria</a>
+  </header>
+
+  <div class="metrics">
+    <article class="card"><span>Total de vistorias</span><strong>{{ inspections().length }}</strong><small>Solicitações registradas</small></article>
+    <article class="card"><span>Em aberto</span><strong>{{ pendingCount() }}</strong><small>Aguardando conclusão</small></article>
+    <article class="card"><span>Concluídas</span><strong>{{ completedCount() }}</strong><small>Com evidências enviadas</small></article>
+    <article class="card"><span>Modelos ativos</span><strong>{{ templateCount() }}</strong><small>Fluxos configurados</small></article>
+  </div>
+
+  <section class="card recent">
+    <div class="section-heading"><div><h2>Vistorias recentes</h2><p>Últimas solicitações criadas</p></div><a routerLink="/vistorias">Ver todas</a></div>
+    @if (loading()) {
+      <div class="empty">Carregando informações...</div>
+    } @else if (!inspections().length) {
+      <div class="empty">Nenhuma vistoria criada até o momento.</div>
+    } @else {
+      <div class="table-wrap"><table><thead><tr><th>Identificação</th><th>Modelo</th><th>Destinatário</th><th>Status</th><th>Criada em</th></tr></thead>
+        <tbody>@for (inspection of inspections().slice(0, 6); track inspection.id) {
+          <tr><td><strong>{{ inspection.assetIdentification }}</strong></td><td>{{ inspection.templateName }}</td><td>{{ inspection.recipientName }}</td><td><span class="status status-{{ inspection.status }}">{{ statusLabel(inspection.status) }}</span></td><td>{{ inspection.createdAtUtc | date:'dd/MM/yyyy' }}</td></tr>
+        }</tbody>
+      </table></div>
+    }
+  </section>
+</section>

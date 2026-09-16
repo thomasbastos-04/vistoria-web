@@ -9,16 +9,18 @@
 >
   <title id="favicon-title">Vistor.ia</title>
 
-  <rect width="64" height="64" rx="15" fill="#D9A63A" />
+  <rect width="64" height="64" rx="16" fill="#123F36" />
 
-  <path
-    d="M14 20L30 49L50 13"
+  <g
     fill="none"
-    stroke="#123F36"
-    stroke-width="9"
+    stroke="#F7F5EE"
+    stroke-width="5"
     stroke-linecap="round"
     stroke-linejoin="round"
-  />
+  >
+    <path d="M13 27V19C13 14.582 16.582 11 21 11H43C47.418 11 51 14.582 51 19V27" />
+    <path d="M13 32L32 53L51 32" />
+  </g>
 
-  <circle cx="50" cy="13" r="4" fill="#F7F5EE" />
+  <circle cx="43" cy="21" r="4.5" fill="#D9A63A" />
 </svg>

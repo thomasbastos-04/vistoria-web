@@ -1,6 +1,8 @@
 <main class="auth-page">
   <section class="auth-intro">
-    <a class="brand" routerLink="/"><span>V</span>Vistor<em>.ia</em></a>
+    <a class="brand" routerLink="/" aria-label="Vistor.ia">
+      <img class="brand-logo" src="assets/logo.svg" alt="Vistor.ia">
+    </a>
     <div>
       <p class="eyebrow">VISTORIAS DIGITAIS</p>
       <h1>Evidências organizadas. Decisões mais seguras.</h1>
@@ -11,7 +13,7 @@
 
   <section class="auth-content">
     <form class="auth-card" [formGroup]="form" (ngSubmit)="submit()">
-      <div class="mobile-brand"><span>V</span>Vistor.ia</div>
+      <div class="mobile-brand"><img class="brand-logo" src="assets/logo.svg" alt="Vistor.ia"></div>
       <header><h2>Acesse sua conta</h2><p>Informe seus dados para continuar.</p></header>
       @if (errorMessage()) { <div class="notice notice-error">{{ errorMessage() }}</div> }
       <div class="field">

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  role="img"
+  aria-labelledby="favicon-title"
+>
+  <title id="favicon-title">Vistor.ia</title>
+
+  <rect width="64" height="64" rx="15" fill="#D9A63A" />
+
+  <path
+    d="M14 20L30 49L50 13"
+    fill="none"
+    stroke="#123F36"
+    stroke-width="9"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <circle cx="50" cy="13" r="4" fill="#F7F5EE" />
+</svg>

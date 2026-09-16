@@ -1,8 +1,7 @@
 .shell { min-height: 100vh; display: grid; grid-template-columns: 250px 1fr; }
 .sidebar { position: sticky; top: 0; height: 100vh; padding: 26px 18px 18px; color: white; background: var(--primary); display: flex; flex-direction: column; z-index: 20; }
-.brand { display: flex; align-items: center; gap: 10px; font-size: 20px; font-weight: 760; letter-spacing: -.03em; }
-.brand > span:last-child span { color: var(--accent); }
-.brand-mark { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; color: var(--primary); background: var(--accent); font-weight: 850; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-logo { display: block; height: 34px; width: auto; max-width: 100%; }
 nav { display: grid; gap: 6px; margin-top: 44px; }
 nav a { padding: 11px 13px; border-radius: 8px; color: #dce7e3; font-size: 14px; font-weight: 620; }
 nav a:hover, nav a.active { color: white; background: #ffffff14; }

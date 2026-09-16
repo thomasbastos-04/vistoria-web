@@ -1,8 +1,7 @@
 .auth-page { min-height: 100vh; display: grid; grid-template-columns: minmax(360px, 44%) 1fr; background: white; }
 .auth-intro { padding: 42px clamp(34px, 5vw, 76px); color: white; background: var(--primary); display: flex; flex-direction: column; justify-content: space-between; }
-.brand, .mobile-brand { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; letter-spacing: -.04em; }
-.brand span, .mobile-brand span { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 8px; color: var(--primary); background: var(--accent); }
-.brand em { color: var(--accent); font-style: normal; }
+.brand, .mobile-brand { display: flex; align-items: center; gap: 10px; }
+.brand-logo { display: block; height: 36px; width: auto; max-width: 100%; }
 .auth-intro h1 { max-width: 540px; margin: 12px 0 18px; font-size: clamp(36px, 4vw, 58px); line-height: 1.03; letter-spacing: -.05em; }
 .auth-intro p:not(.eyebrow) { max-width: 500px; color: #c8d8d3; font-size: 17px; line-height: 1.6; }
 .eyebrow { color: var(--accent); font-size: 12px; font-weight: 800; letter-spacing: .14em; }

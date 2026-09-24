@@ -11,6 +11,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/auth/register.page').then(m => m.RegisterPage)
   },
   {
+    path: 'verificar-email',
+    loadComponent: () => import('./features/auth/verify-email.page').then(m => m.VerifyEmailPage)
+  },
+  {
     path: 'vistoria/:token',
     loadComponent: () => import('./features/public-inspection/public-inspection.page').then(m => m.PublicInspectionPage)
   },

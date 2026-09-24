@@ -88,6 +88,51 @@
   margin-top: 4px;
 }
 
+.delivery-note {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.delivery-note strong {
+  color: var(--text);
+}
+
+.verification-code {
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: .28em;
+  text-align: center;
+}
+
+.verification-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.verification-meta strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.resend-link {
+  border: 0;
+  padding: 0;
+  color: var(--primary);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.resend-link:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
 .switch {
   margin: 2px 0 0;
   text-align: center;

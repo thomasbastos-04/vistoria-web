@@ -2,7 +2,7 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs';
-import { AuthResponse, LoginRequest, RegisterRequest } from '../models/api.models';
+import { AuthResponse, LoginRequest, RegisterRequest, VerifyEmailRequest } from '../models/api.models';
 
 const STORAGE_KEY = 'vistoria_auth';
 
@@ -28,6 +28,14 @@ export class AuthService {
     return this.http.post<AuthResponse>('/api/auth/register', request).pipe(
       tap(response => this.saveSession(response))
     );
+  }
+
+  verifyEmail(request: VerifyEmailRequest) {
+    return this.http.post<void>('/api/auth/verify', request);
+  }
+
+  resendVerificationCode(email: string) {
+    return this.http.post<void>('/api/auth/resend-code', { email });
   }
 
   accessToken(): string | null {

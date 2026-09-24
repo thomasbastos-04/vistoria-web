@@ -1,0 +1,47 @@
+<main class="auth-page">
+  <section class="auth-intro">
+    <a class="brand" routerLink="/" aria-label="Vistor.ia">
+      <img class="brand-logo" src="assets/logo-white.svg" alt="Vistor.ia">
+    </a>
+    <div>
+      <p class="eyebrow">QUASE LÁ</p>
+      <h1>Confirme seu e-mail para proteger sua conta.</h1>
+      <p>Essa etapa mantém suas vistorias e documentos acessíveis apenas para você.</p>
+    </div>
+    <small>Vistor.ia — gestão de inspeções com inteligência.</small>
+  </section>
+
+  <section class="auth-content">
+    <form class="auth-card verify-card" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="mobile-brand"><img class="brand-logo" src="assets/logo.svg" alt="Vistor.ia"></div>
+      <header>
+        <h2>Verifique seu e-mail</h2>
+        <p>Enviamos um código de 6 dígitos para confirmar sua conta.</p>
+      </header>
+      @if (successMessage()) { <div class="notice notice-success">{{ successMessage() }}</div> }
+      @if (errorMessage()) { <div class="notice notice-error">{{ errorMessage() }}</div> }
+      <p class="delivery-note">Código enviado para <strong>{{ form.controls.email.value }}</strong> — verifique sua caixa de spam. Código válido por 15 minutos.</p>
+      <div class="field">
+        <label for="email">E-mail</label>
+        <input id="email" type="email" formControlName="email" autocomplete="email" placeholder="voce@empresa.com">
+        @if (form.controls.email.touched && form.controls.email.invalid) { <p class="error">Informe um e-mail válido.</p> }
+      </div>
+      <div class="field">
+        <label for="code">Código de verificação</label>
+        <input id="code" class="verification-code" formControlName="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" placeholder="000000" (input)="onCodeInput()">
+        @if (form.controls.code.touched && form.controls.code.invalid) { <p class="error">Digite os 6 dígitos recebidos.</p> }
+      </div>
+      <div class="verification-meta">
+        <span>Expira em <strong>{{ formattedTime(secondsRemaining()) }}</strong></span>
+        <span>{{ attempts() }}/5 tentativas</span>
+      </div>
+      <button class="btn btn-primary submit" type="submit" [disabled]="loading() || attempts() >= 5 || secondsRemaining() === 0">
+        @if (loading()) { <span class="spinner"></span> } @else { Verificar }
+      </button>
+      <button class="resend-link" type="button" [disabled]="resendSecondsRemaining() > 0 || resending()" (click)="resendCode()">
+        @if (resending()) { Enviando... } @else if (resendSecondsRemaining() > 0) { Reenviar código em {{ resendSecondsRemaining() }}s } @else { Reenviar código }
+      </button>
+      <p class="switch"><a routerLink="/login">Voltar para o login</a></p>
+    </form>
+  </section>
+</main>

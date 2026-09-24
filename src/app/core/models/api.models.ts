@@ -17,6 +17,11 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface VerifyEmailRequest {
+  email: string;
+  code: string;
+}
+
 export interface PhotoRequirement {
   id?: string;
   code: string;

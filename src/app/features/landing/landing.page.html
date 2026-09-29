@@ -3,7 +3,9 @@
     <a class="brand" routerLink="/" aria-label="Vistor.ia, página inicial">
       <img src="assets/logo.svg" alt="Vistor.ia">
     </a>
-    <nav aria-label="Navegação principal">
+    <nav class="site-nav" aria-label="Navegação principal">
+      <a class="nav-section-link" href="#como-funciona">Como funciona</a>
+      <a class="nav-section-link" href="#recursos">Recursos</a>
       <a class="login-link" routerLink="/login">Entrar</a>
       <a class="btn btn-primary nav-cta" routerLink="/cadastro">Criar conta</a>
     </nav>
@@ -14,23 +16,98 @@
     <div class="hero-shade"></div>
     <div class="hero-copy">
       <p class="eyebrow"><span></span> VISTORIAS DIGITAIS, SEM COMPLICAÇÃO</p>
-      <h1>Uma boa vistoria começa com <em>evidências claras.</em></h1>
-      <p class="intro">Crie solicitações, receba fotos e acompanhe cada etapa em um só lugar. Mais organização para sua equipe, mais praticidade para quem vistoria.</p>
+      <h1>Da solicitação à evidência: <em>tudo no lugar.</em></h1>
+      <p class="intro">Padronize o que precisa ser vistoriado, compartilhe um link com o cliente e acompanhe o envio das fotos. Um fluxo claro para quem solicita e para quem realiza.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" routerLink="/cadastro">Organizar minhas vistorias <span aria-hidden="true">→</span></a>
+        <a class="btn btn-primary" routerLink="/cadastro">Começar agora <span aria-hidden="true">→</span></a>
         <a class="text-link" routerLink="/login">Já tenho uma conta</a>
       </div>
-      <div class="hero-benefits" aria-label="Benefícios">
-        <span><i aria-hidden="true">✓</i> Modelos reutilizáveis</span>
-        <span><i aria-hidden="true">✓</i> Fotos em um só lugar</span>
-        <span><i aria-hidden="true">✓</i> Acompanhamento simples</span>
+    </div>
+    <div class="hero-caption" aria-hidden="true">
+      <span class="caption-line"></span>
+      <span>REGISTRO VISUAL<br><strong>Feito no local, pelo celular.</strong></span>
+    </div>
+  </section>
+
+  <section class="intro-band" aria-label="Resumo da plataforma">
+    <p>Menos retrabalho para organizar inspeções.</p>
+    <span aria-hidden="true"></span>
+    <p>Mais contexto em cada foto recebida.</p>
+    <span aria-hidden="true"></span>
+    <p>Visibilidade do início à conclusão.</p>
+  </section>
+
+  <section class="workflow section-wrap" id="como-funciona">
+    <div class="section-heading">
+      <p class="eyebrow dark"><span></span> UM FLUXO, TRÊS PASSOS</p>
+      <h2>Uma vistoria bem conduzida começa antes da primeira foto.</h2>
+      <p>Deixe as instruções claras desde o início e acompanhe o andamento sem perder informações pelo caminho.</p>
+    </div>
+    <div class="workflow-grid">
+      <article class="workflow-step">
+        <span class="step-number">01</span>
+        <div class="step-rule"></div>
+        <h3>Defina o que observar</h3>
+        <p>Monte modelos com os itens e as fotos que cada tipo de vistoria precisa.</p>
+        <span class="step-tag">MODELOS REUTILIZÁVEIS</span>
+      </article>
+      <article class="workflow-step">
+        <span class="step-number">02</span>
+        <div class="step-rule"></div>
+        <h3>Envie uma solicitação</h3>
+        <p>Crie a vistoria e compartilhe o link para o preenchimento, sem exigir cadastro do cliente.</p>
+        <span class="step-tag">PREENCHIMENTO POR LINK</span>
+      </article>
+      <article class="workflow-step">
+        <span class="step-number">03</span>
+        <div class="step-rule"></div>
+        <h3>Acompanhe as evidências</h3>
+        <p>Veja o que já foi enviado, o que ainda falta e quando a vistoria for concluída.</p>
+        <span class="step-tag">STATUS ATUALIZADO</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="feature-section" id="recursos">
+    <div class="feature-layout section-wrap">
+      <div class="feature-heading">
+        <p class="eyebrow dark"><span></span> FEITA PARA O DIA A DIA</p>
+        <h2>Organização que acompanha o trabalho de verdade.</h2>
+        <p>As informações da vistoria ficam conectadas: do modelo usado à evidência enviada e ao status final.</p>
+        <a class="feature-link" routerLink="/cadastro">Conheça a plataforma <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature-list">
+        <article class="feature-item">
+          <span class="feature-index">A</span>
+          <div><h3>Um padrão para cada tipo de vistoria</h3><p>Reaproveite modelos e deixe os requisitos de foto definidos antes de enviar.</p></div>
+          <span class="feature-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article class="feature-item">
+          <span class="feature-index">B</span>
+          <div><h3>Um caminho simples para o cliente</h3><p>O link público abre a vistoria sem que a outra pessoa precise criar uma conta.</p></div>
+          <span class="feature-arrow" aria-hidden="true">↗</span>
+        </article>
+        <article class="feature-item">
+          <span class="feature-index">C</span>
+          <div><h3>Um lugar para acompanhar tudo</h3><p>Consulte solicitações, evidências recebidas e o andamento das inspeções.</p></div>
+          <span class="feature-arrow" aria-hidden="true">↗</span>
+        </article>
       </div>
     </div>
   </section>
 
+  <section class="closing-cta">
+    <div class="closing-copy">
+      <p class="eyebrow"><span></span> PRONTO PARA ORGANIZAR?</p>
+      <h2>Comece sua próxima vistoria com tudo combinado.</h2>
+      <p>Crie sua conta e prepare o primeiro modelo da sua equipe.</p>
+    </div>
+    <a class="btn closing-button" routerLink="/cadastro">Criar minha conta <span aria-hidden="true">→</span></a>
+  </section>
+
   <footer class="landing-footer">
-    <span class="footer-brand">Vistor.ia <i aria-hidden="true">✳</i></span>
-    <span>Do pedido à entrega, tudo acompanhado.</span>
-    <span>Inspeções mais organizadas, decisões mais seguras.</span>
+    <a class="footer-brand" routerLink="/">Vistor.ia <i aria-hidden="true">✳</i></a>
+    <span>Vistorias digitais com mais clareza.</span>
+    <div><a routerLink="/login">Entrar</a><a routerLink="/cadastro">Criar conta</a></div>
   </footer>
 </main>

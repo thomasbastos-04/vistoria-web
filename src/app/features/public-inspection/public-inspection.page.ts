@@ -47,7 +47,22 @@ export class PublicInspectionPage {
         input.value = '';
       })
     ).subscribe({
-      next: () => this.loadInspection(false),
+      next: () => {
+        this.inspection.update(current => {
+          if (!current) {
+            return current;
+          }
+
+          return {
+            ...current,
+            requirements: current.requirements.map(requirement =>
+              requirement.id === requirementId
+                ? { ...requirement, uploaded: true }
+                : requirement
+            )
+          };
+        });
+      },
       error: error => this.errorMessage.set(getErrorMessage(error))
     });
   }

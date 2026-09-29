@@ -36,7 +36,9 @@ export class RegisterPage {
     this.authService.register(this.form.getRawValue()).pipe(
       finalize(() => this.loading.set(false))
     ).subscribe({
-      next: () => void this.router.navigate(['/dashboard']),
+      next: () => void this.router.navigate(['/verificar-email'], {
+        queryParams: { email: this.form.controls.email.value }
+      }),
       error: error => this.errorMessage.set(getErrorMessage(error))
     });
   }

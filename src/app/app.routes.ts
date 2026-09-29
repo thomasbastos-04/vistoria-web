@@ -3,6 +3,11 @@ import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./features/landing/landing.page').then(m => m.LandingPage)
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/auth/login.page').then(m => m.LoginPage)
   },
